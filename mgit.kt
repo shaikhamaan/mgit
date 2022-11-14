@@ -93,15 +93,22 @@ fun main(args: Array<String>) {
             val path = Paths.get("").toAbsolutePath().toString()
             val newHash = GenerateHash()
             val hash = newHash.getHash(path + "/" + args[1])
+            //creating a directory to store objects 
+            try{
+                  Files.createDirectory(Paths.get(path + "/.mgit/objects"))
+            } catch (e: IOException) {
 
-            // Creating objects folder and hash file
+            }
+
+            // Creating hash file
             try {
-                Files.createDirectory(Paths.get(path + "/.mgit/objects"))
                 val hashPath = Files.createFile(Paths.get(path + "/.mgit/objects/$hash"))
+                val fileContent = File(path + "/" + args[1])
+                File(hashPath.toString()).writeText(fileContent.readText())
                 println("File successfully hashed!")
                 println("Hash: $hash")
-                File(hashPath.toString()).writeText(args[1])
             } catch (e: IOException) {
+                println(e)
                 println("Hash already exists!")
                 println("Hash: $hash")
             }
