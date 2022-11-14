@@ -1,16 +1,16 @@
-#!/bin/sh
+#!/bin/sh 
+shopt -s expand_aliases
 
 # Create a folder in /usr/bin/
-cd /usr/bin && mkdir mgit && cd mgit
+cd /usr/bin && mkdir mgit 
+# cd into mgit dir
+cd mgit
 
-# Download mgit.kt
-wget -L "https://github.com/shaikhamaan/mgit/blob/main/mgit.kt"
+# Download mgit.jar
+wget  "https://raw.githubusercontent.com/shaikhamaan/mgit/main/mgit.jar"
 
 # Download mgit.sh
-wget -L "https://github.com/shaikhamaan/mgit/blob/main/mgit.sh"
-
-# Create jar from mgit.kt
-kotlinc mgit.kt -include-runtime -d mgit.jar
+wget "https://raw.githubusercontent.com/shaikhamaan/mgit/main/mgit.sh"
 
 # Add execution permission to mgit.sh
 chmod +x mgit.sh
@@ -19,4 +19,4 @@ chmod +x mgit.sh
 export PATH=$PATH:/usr/bin/mgit
 
 # Creating an alias mgit to easily execute commands
-alias mgit="sh ./mgit.sh"
+alias mgit="cd /usr/bin/mgit && sh ./mgit.sh"
